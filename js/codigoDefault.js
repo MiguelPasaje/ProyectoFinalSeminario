@@ -127,8 +127,10 @@ function insertarDatos(){
     var datosArt = document.getElementById("datosInicio");
     var articulos = "";
     for(let num in datosArticulos){
+        var numero1 = generarNum(11,21);
+        var cadena = "./img/"+numero1+".jpg";
         articulos+="<div class='card text-white bg-success mb-3' style='min-width: 25%; display:flex; float:left;'>"
-        +"<div class='card-header'>Articulo</div>"
+        +"<div class='card-header' style='background-image: url("+cadena+"); height:300px; background-size:cover;'></div>"
         +"<div class='card-body'>"
             +"<h5 class='card-title'>"+datosArticulos[num]["titulo"]+"</h5>"
             +"<p>"+datosArticulos[num]["contenido"]+"</p></div></div>";
@@ -137,19 +139,23 @@ function insertarDatos(){
 
     var datosSecciones = document.getElementById("datosQuienesSomos");
     var secciones = "";
+    var cadena3 = "./img/fondo.jpg";
     for(let num2 in datosQuienes){
         secciones+="<div class='card text-white bg-info mb-3' style='min-width: 25%; display:flex; float:left;'>"
-        +"<div class='card-header'>Articulo</div>"
+        +"<div class='card-header' style='background-image: url("+cadena3+");height:50px;'></div>"
         +"<div class='card-body'>"
             +"<h5 class='card-title'>"+datosQuienes[num2]["titulo"]+"</h5>"
             +"<p>"+datosQuienes[num2]["contenido"]+"</p></div></div>";
     }
     datosSecciones.innerHTML=secciones;
+
     var datosEventos = document.getElementById("datosEventos");
     var eventos = "";
     for(let num3 in datosEventosIns){
+        var numero2 = generarNum(21,31);
+        var cadena2 = "./img/"+numero2+".jpg";
         eventos+="<div class='card text-white bg-info mb-3' style='min-width: 25%; display:flex; float:left;'>"
-        +"<div class='card-header'>Evento</div>"
+        +"<div class='card-header' style='background-image: url("+cadena2+"); height:200px; background-size:cover;'></div>"
         +"<div class='card-body'>"
             +"<h5 class='card-title'>"+datosEventosIns[num3]["nombre"]+"</h5>"+
             "Fecha : "+"<p>"+datosEventosIns[num3]["fecha"]+"</p>"+
@@ -158,4 +164,8 @@ function insertarDatos(){
             "Participantes : "+"<p>"+datosEventosIns[num3]["participantes"]+"</p>"+"</div></div>";
     }
     datosEventos.innerHTML="<h1 class='p-3' style='text-align:center;'>EVENTOS</h1>"+eventos;
+}
+
+function generarNum(min,max){
+    return Math.floor(Math.random() * (max - min)) + min;
 }
