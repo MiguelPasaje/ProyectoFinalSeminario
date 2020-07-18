@@ -1,6 +1,6 @@
 <?php
 //---------------------------------------------------------------
-if (extension_loaded("mongodb") && isset($_POST["nombre"])){
+if (extension_loaded("mongodb") && isset($_POST["titulo"])){
     try{
         $manager = new MongoDB\Driver\Manager("mongodb+srv://Andres:catacumba69@cluster0-jlyfz.mongodb.net/hospital?retryWrites=true&w=majority");
         $bulk = new MongoDB\Driver\BulkWrite;

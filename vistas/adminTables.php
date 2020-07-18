@@ -137,6 +137,27 @@
 <div id="adminContenido" style="display: none;" >
     <div class="container">
         <h1 class='p-3 text-white bg-info' style='text-align:center;'>CONTENIDO EN INICIO</h1>
+        <div class="row"><button id="btnAgregarArticulo" class="col btn btn-success p-3 m-5" onclick="mostrarForm('articulos')">Agregar Nuevo Artículo</button></div>
+        <form id="formularioArticulos" action="" method="POST" style="text-align: center;"></form>
+        <div id="newArticleForm" style="display:none;">
+            <div class="row bg-info text-white">
+                <div class="col-sm-12 col-xs-12 col-md-2 col-lg-3">
+                    <div class="row">Titulo</div>
+                    <div class="row"><input form="formularioArticulos" class="form-control" id="tituloA" type="text" name="titulo" required></div>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-8 col-lg-6">
+                    <div class="row">Contenido</div>
+                    <div class="row"><input form="formularioArticulos" class="form-control" id="contenidoA" type="text" name="contenido" required></div>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-2 col-lg-3">
+                    <div class="row">Acciones</div>
+                    <div class="row">
+                        <button form="formularioArticulos" id="btnInsertarArticulo" type="button" class="col btn btn-sm btn-success" onclick="agregarRegistro('articulos')">Insertar</button>
+                        <button form="formularioArticulos" id="btnCancelarRArticulo" type="button" class="col btn btn-sm btn-danger" onclick="agregarRegistro('cancelarRArticulo')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <table id="contentInitTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
@@ -151,6 +172,27 @@
     </div>
     <div class="container">
         <h1 class='p-3 text-white bg-info' style='text-align:center;'>CONTENIDO EN QUIENES SOMOS</h1>
+        <div class="row"><button id="btnAgregarTexto" class="col btn btn-success p-3 m-5" onclick="mostrarForm('textos')">Agregar Nuevo Artículo</button></div>
+        <form id="formularioTextos" action="" method="POST" style="text-align: center;"></form>
+        <div id="newTextForm" style="display:none;">
+            <div class="row bg-info text-white">
+                <div class="col-sm-12 col-xs-12 col-md-2 col-lg-3">
+                    <div class="row">Titulo</div>
+                    <div class="row"><input form="formularioTextos" class="form-control" id="tituloT" type="text" name="titulo" required></div>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-8 col-lg-6">
+                    <div class="row">Contenido</div>
+                    <div class="row"><input form="formularioTextos" class="form-control" id="contenidoT" type="text" name="contenido" required></div>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-2 col-lg-3">
+                    <div class="row">Acciones</div>
+                    <div class="row">
+                        <button form="formularioTextos" id="btnInsertarTexto" type="button" class="col btn btn-sm btn-success" onclick="agregarRegistro('textos')">Insertar</button>
+                        <button form="formularioTextos" id="btnCancelarRTexto" type="button" class="col btn btn-sm btn-danger" onclick="agregarRegistro('cancelarRTexto')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <table id="contentWhoTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>

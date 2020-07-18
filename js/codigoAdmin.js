@@ -16,6 +16,14 @@ function mostrarForm(form){
             document.getElementById('newUserForm').style.display="block";
             document.getElementById('btnAgregarUsuario').style.display="none";
         break;
+        case "articulos":
+            document.getElementById('newArticleForm').style.display="block";
+            document.getElementById('btnAgregarArticulo').style.display="none";
+        break;
+        case "textos":
+            document.getElementById('newTextForm').style.display="block";
+            document.getElementById('btnAgregarTexto').style.display="none";
+        break;
     }
 }
 $(document).ready( function () {
@@ -496,6 +504,81 @@ function agregarRegistro(colleccion){
                 });
             }
             break;
+
+        case "articulos":
+            var enviar = false;
+            const titulo = document.querySelector('#tituloA').value;
+            const contenido = document.querySelector('#contenidoA').value;
+            if (titulo!="" && contenido!=""){enviar=true;}else{alert("Faltan campos por rellenar");}
+            
+            if(enviar){
+                document.querySelector('#tituloA').value=titulo.trim();
+                document.querySelector('#contenidoA').value=contenido.trim();
+
+                var formData = new FormData(document.getElementById("formularioArticulos"));
+                formData.append('coleccion','articulos');
+                $.ajax({
+                    url: "insertarArticulo.php",
+                    type: "post",
+                    dataType: "html",
+                    data: formData,
+                    contentType: false,
+                    processData: false
+                }).done(function(res){
+                    alert(res);
+                    document.querySelector('#tituloA').value="";
+                    document.querySelector('#contenidoA').value="";
+                    document.getElementById('newArticleForm').style.display="none";
+                    document.getElementById('btnAgregarArticulo').style.display="block";
+                    $('#contentInitTable').DataTable().ajax.reload();
+                    enviar =false;
+                });
+            }
+            break;
+
+        case "textos":
+            var enviar = false;
+            const titulo2 = document.querySelector('#tituloT').value;
+            const contenido2 = document.querySelector('#contenidoT').value;
+            if (titulo2!="" && contenido2!=""){enviar=true;}else{alert("Faltan campos por rellenar");}
+            
+            if(enviar){
+                document.querySelector('#tituloT').value=titulo2.trim();
+                document.querySelector('#contenidoT').value=contenido2.trim();
+
+                var formData = new FormData(document.getElementById("formularioTextos"));
+                formData.append('coleccion','datosTexto');
+                $.ajax({
+                    url: "insertarArticulo.php",
+                    type: "post",
+                    dataType: "html",
+                    data: formData,
+                    contentType: false,
+                    processData: false
+                }).done(function(res){
+                    alert(res);
+                    document.querySelector('#tituloT').value="";
+                    document.querySelector('#contenidoT').value="";
+                    document.getElementById('newTextForm').style.display="none";
+                    document.getElementById('btnAgregarTexto').style.display="block";
+                    $('#contentWhoTable').DataTable().ajax.reload();
+                    enviar =false;
+                });
+            }
+            break;
+        case "cancelarRArticulo":
+            document.querySelector('#tituloA').value="";
+            document.querySelector('#contenidoA').value="";
+            document.getElementById('newArticleForm').style.display="none";
+            document.getElementById('btnAgregarArticulo').style.display="block"; 
+            break; 
+
+        case "cancelarRTexto":
+            document.querySelector('#tituloT').value="";
+            document.querySelector('#contenidoT').value="";
+            document.getElementById('newTextForm').style.display="none";
+            document.getElementById('btnAgregarTexto').style.display="block";
+            break; 
 
         case "cancelarRUsuario":
             document.querySelector('#nombres').value="";
