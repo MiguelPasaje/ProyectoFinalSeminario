@@ -3,7 +3,7 @@
         <h1 class='p-3 text-white bg-info' style='text-align:center;'>DATOS DE EVENTOS</h1>
         <div class="row"><button id="btnAgregarEvent" class="col btn btn-success p-3 m-5" onclick="mostrarForm('eventos')">Agregar Nuevo Evento</button></div>
         <form id="formularioEventos" action="" method="POST" style="text-align: center;"></form>
-        <table id="eventsTableForm" class="table table-striped table-bordered table-success" style="width:100%;display:none;">
+        <table id="eventsTableForm" class="table table-bordered table-hover table-success" style="width:100%;display:none;">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -38,7 +38,7 @@
                     </tr>
             </tbody>
         </table>
-        <table id="eventsTable" class="table table-hover table-striped table-bordered" style="width:100%">
+        <table id="eventsTable" class="table  table-hover table-success table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>id</th>
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <table id="usersTable" class="table table-striped table-bordered" style="width:100%">
+        <table id="usersTable" class="table table-bordered table-hover table-success" style="width:100%">
             <thead>
                 <tr>
                     <th>nombres</th>
@@ -117,7 +117,7 @@
     </div>
     <div class="container">
         <h1 class='p-3 text-white bg-danger' style='text-align:center;'>USUARIOS PENDIENTES DE APROBACIÓN</h1>
-        <table id="usersTempTable" class="table table-striped table-bordered" style="width:100%">
+        <table id="usersTempTable" class="table table-bordered table-hover table-success" style="width:100%">
             <thead>
                 <tr>
                     <th>nombres</th>
@@ -158,7 +158,7 @@
                 </div>
             </div>
         </div>
-        <table id="contentInitTable" class="table table-striped table-bordered" style="width:100%">
+        <table id="contentInitTable" class="table table-bordered table-hover table-success" style="width:100%">
             <thead>
                 <tr>
                     <th>id</th>
@@ -193,7 +193,7 @@
                 </div>
             </div>
         </div>
-        <table id="contentWhoTable" class="table table-striped table-bordered" style="width:100%">
+        <table id="contentWhoTable" class="table table-bordered table-hover table-success" style="width:100%">
             <thead>
                 <tr>
                     <th>id</th>

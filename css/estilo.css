@@ -7,3 +7,11 @@ footer{
 footer p{
 	text-align: center;
 }
+body{
+	background-image: url("../img/fondo.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.card{
+	opacity: 0.97;
+}
