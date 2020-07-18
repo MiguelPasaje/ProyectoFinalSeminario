@@ -38,6 +38,7 @@ function registrarUsuario(){
     
     if(enviar){
         var formData = new FormData(document.getElementById("formularioReg"));
+        formData.append('coleccion','usuariosTemporales');
         $.ajax({
             url: "registry.php",
             type: "post",

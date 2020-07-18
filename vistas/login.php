@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                     <label for="contrasenia">Contraseña</label>
-                    <input type="password" class="form-control" id="contraseniaReg" name="contraseniaReg" required>
+                    <input type="password" class="form-control" id="contraseniaReg" name="contrasenia" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>

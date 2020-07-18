@@ -122,12 +122,11 @@
                 <tr>
                     <th>nombres</th>
                     <th>apellidos</th>
-                    <th>nombreUsuario</th>
+                    <th>usuario</th>
                     <th>contrasenia</th>
                     <th>email</th>
                     <th>cc</th>
                     <th>tel</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="usersTempTable2">

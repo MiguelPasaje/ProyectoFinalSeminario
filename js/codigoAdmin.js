@@ -35,26 +35,7 @@ $(document).ready( function () {
             {data: 'lugar'},
             {data: 'hora'},
             {data: 'participantes'}
-            /*{defaultContent: `<div class="btn-group" role="group" aria-label="acciones">
-            <button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-            </div>`}*/
         ],
-        language: {
-                "lengthMenu": "Mostrar _MENU_ registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "Buscar:",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast":"Último",
-                    "sNext":"Siguiente",
-                    "sPrevious": "Anterior"
-			     },
-			     "sProcessing":"Procesando...",
-            },
         responsive: "true",
         dom: 'Brtp',       
         buttons:[ 
@@ -161,7 +142,7 @@ $(document).ready( function () {
             dataType:'json',
             columns:{
                 identifier : [2, 'usuario'],
-                editable:[[0, 'nombres'],[1, 'apellidos'], [2, 'usuario'],[3, 'contrasenia'],[4, 'email'],[5, 'cc'],[6, 'tel']]
+                editable:[[0, 'nombres'],[1, 'apellidos'],[3, 'contrasenia'],[4, 'email'],[5, 'cc'],[6, 'tel']]
             },
             buttons: {
                 edit: {
@@ -200,19 +181,61 @@ $(document).ready( function () {
             method: "POST",
             data: {"collection" : "usuariosTemporales"}
         },
+        responsive: "true",
+        dom: 'rtp',
         columns:[
             {data: 'nombres'},
             {data: 'apellidos'},
-            {data: 'nombreUsuario'},
+            {data: 'usuario'},
             {data: 'contrasenia'},
             {data: 'email'},
             {data: 'cc'},
-            {data: 'tel'},
-            {defaultContent: `<div class="btn-group" role="group" aria-label="acciones">
-            <button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-            </div>`}
+            {data: 'tel'}
         ]
+    });
+    $('#usersTempTable').on('draw.dt', function(){
+        $('#usersTempTable').Tabledit({
+            url:'actionUsersTemp.php',
+            dataType:'json',
+            columns:{
+                identifier : [2, 'usuario'],
+                editable:[[0, 'nombres'],[1, 'apellidos'],[3, 'contrasenia'],[4, 'email'],[5, 'cc'],[6, 'tel']]
+            },
+            buttons: {
+                edit: {
+                    class: 'btn btn-sm btn-success',
+                    html: '<i class="fas fa-check"></i>',
+                    action: 'edit'
+                },
+                delete: {
+                    class: 'btn btn-sm btn-danger',
+                    html: '<i class="fas fa-times"></i>',
+                    action: 'delete'
+                },
+                save: {
+                    class: 'btn btn-sm btn-success',
+                    html: 'Confirmar'
+                },
+                confirm: {
+                    class: 'btn btn-sm btn-warning',
+                    html: 'Confirmar'
+                }
+            },
+            restoreButton:false,
+            onSuccess:function(data, textStatus, jqXHR)
+            {
+                if(data.action == 'delete')
+                {
+                     $('#' + data.id).remove();
+                     $('#usersTempTable').DataTable().ajax.reload();
+                }else{
+                    if(data.action == 'edit'){
+                        $('#usersTable').DataTable().ajax.reload();
+                        $('#usersTempTable').DataTable().ajax.reload();
+                    }
+                }
+            }
+        });
     });
     $('#contentInitTable').DataTable({
         ajax:{
