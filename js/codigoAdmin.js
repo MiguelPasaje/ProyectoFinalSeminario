@@ -238,37 +238,156 @@ $(document).ready( function () {
         });
     });
     $('#contentInitTable').DataTable({
+        processing: true,
+        serverSide: true,
         ajax:{
             url: "getData.php",
             method: "POST",
             data: {"collection" : "articulos"}
         },
         columns:[
+            {data: 'id'},
             {data: 'titulo'},
-            {data: 'contenido'},
-            {defaultContent: `<div class="btn-group" role="group" aria-label="acciones">
-            <button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-            </div>`}
-        ]
+            {data: 'contenido'}
+        ],
+        responsive: "true",
+        dom: 'Brtp',       
+        buttons:[ 
+			{
+				extend:    'excelHtml5',
+				text:      '<i class="far fa-file-excel"></i> ',
+				titleAttr: 'Exportar a Excel',
+				className: 'btn btn-success'
+			},
+			{
+				extend:    'pdfHtml5',
+				text:      '<i class="fas fa-file-pdf"></i> ',
+				titleAttr: 'Exportar a PDF',
+				className: 'btn btn-danger'
+			},
+			{
+				extend:    'print',
+				text:      '<i class="fa fa-print"></i> ',
+				titleAttr: 'Imprimir',
+				className: 'btn btn-info'
+            }
+		]
+    });
+    $('#contentInitTable').on('draw.dt', function(){
+        $('#contentInitTable').Tabledit({
+            url:'actionArticles.php',
+            dataType:'json',
+            columns:{
+                identifier : [0, 'id'],
+                editable:[[1, 'titulo'],[2, 'contenido']]
+            },
+            buttons: {
+                edit: {
+                    class: 'btn btn-sm btn-info',
+                    html: '<i class="fa fa-edit"></i>',
+                    action: 'edit'
+                },
+                delete: {
+                    class: 'btn btn-sm btn-danger',
+                    html: '<i class="fa fa-trash"></i>',
+                    action: 'delete'
+                },
+                save: {
+                    class: 'btn btn-sm btn-success',
+                    html: 'Guardar'
+                },
+                confirm: {
+                    class: 'btn btn-sm btn-warning',
+                    html: 'Confirmar'
+                }
+            },
+            restoreButton:false,
+            onSuccess:function(data, textStatus, jqXHR)
+            {
+                if(data.action == 'delete')
+                {
+                     $('#' + data.id).remove();
+                     $('#contentInitTable').DataTable().ajax.reload();
+                }
+            }
+        });
     });
     $('#contentWhoTable').DataTable({
+        processing: true,
+        serverSide: true,
         ajax:{
             url: "getData.php",
             method: "POST",
             data: {"collection" : "datosTexto"}
         },
         columns:[
+            {data: 'id'},
             {data: 'titulo'},
-            {data: 'contenido'},
-            {defaultContent: `<div class="btn-group" role="group" aria-label="acciones">
-            <button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-            </div>`}
-        ]
+            {data: 'contenido'}
+        ],
+        responsive: "true",
+        dom: 'Brtp',       
+        buttons:[ 
+			{
+				extend:    'excelHtml5',
+				text:      '<i class="far fa-file-excel"></i> ',
+				titleAttr: 'Exportar a Excel',
+				className: 'btn btn-success'
+			},
+			{
+				extend:    'pdfHtml5',
+				text:      '<i class="fas fa-file-pdf"></i> ',
+				titleAttr: 'Exportar a PDF',
+				className: 'btn btn-danger'
+			},
+			{
+				extend:    'print',
+				text:      '<i class="fa fa-print"></i> ',
+				titleAttr: 'Imprimir',
+				className: 'btn btn-info'
+            }
+		]
     });
 } );
-
+$('#contentWhoTable').on('draw.dt', function(){
+    $('#contentWhoTable').Tabledit({
+        url:'actionText.php',
+        dataType:'json',
+        columns:{
+            identifier : [0, 'id'],
+            editable:[[1, 'titulo'],[2, 'contenido']]
+        },
+        buttons: {
+            edit: {
+                class: 'btn btn-sm btn-info',
+                html: '<i class="fa fa-edit"></i>',
+                action: 'edit'
+            },
+            delete: {
+                class: 'btn btn-sm btn-danger',
+                html: '<i class="fa fa-trash"></i>',
+                action: 'delete'
+            },
+            save: {
+                class: 'btn btn-sm btn-success',
+                html: 'Guardar'
+            },
+            confirm: {
+                class: 'btn btn-sm btn-warning',
+                html: 'Confirmar'
+            }
+        },
+        restoreButton:false,
+        onSuccess:function(data, textStatus, jqXHR)
+        {
+            if(data.action == 'delete')
+            {
+                 $('#' + data.id).remove();
+                 $('#contentWhoTable').DataTable().ajax.reload();
+            }
+        }
+    });
+});
 function agregarRegistro(colleccion){
     switch (colleccion){
         case "eventos":

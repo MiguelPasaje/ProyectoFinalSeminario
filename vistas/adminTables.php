@@ -140,10 +140,9 @@
         <table id="contentInitTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
+                    <th>id</th>
                     <th>Titulo</th>
                     <th>Contenido</th>
-                    <th>Imagen</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="contentInitTable2">
@@ -155,10 +154,9 @@
         <table id="contentWhoTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
+                    <th>id</th>
                     <th>Titulo</th>
                     <th>Contenido</th>
-                    <th>Imagen</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="contentWhoTable2">
