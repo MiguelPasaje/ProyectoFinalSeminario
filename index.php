@@ -8,8 +8,11 @@ $user = new User();
 
 if(isset($_SESSION['user'])){
     $user->setUser($userSession->getCurrentUser());
-    include_once 'vistas/home.php';
-
+    if($user->getRol()==md5('administrador')){
+        include_once 'vistas/admin.php';
+    }else{
+        include_once 'vistas/home.php';
+    }
 }else if(isset($_POST['nombre']) && isset($_POST['contrasenia'])){
     
     $userForm = $_POST['nombre'];
@@ -19,16 +22,19 @@ if(isset($_SESSION['user'])){
     if($user->userExists($userForm, $passForm)){
         $userSession->setCurrentUser($userForm);
         $user->setUser($userForm);
-
-        include_once 'vistas/home.php';
+        if($user->getRol()==md5('administrador')){
+            include_once 'vistas/admin.php';
+        }else{
+            include_once 'vistas/home.php';
+        }
     }else{
-        echo "No existe el usuario";
         $errorLogin = "Nombre de usuario y/o password incorrecto";
-        include_once 'vistas/login.php';
+        //include_once 'vistas/login.php';
+        header('Location: vistas/login.php');
     }
 }else{
     //echo "login";
-    include_once 'vistas/login.php';
+    include_once 'vistas/default.php';
 }
 
 ?>

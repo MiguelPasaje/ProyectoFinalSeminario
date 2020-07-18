@@ -2,7 +2,14 @@
 
 class User{
     private $nombre;
-    private $username;
+    private $nombres;
+    private $apellidos;
+    private $nombreUsuario;
+    private $contrasenia;
+    private $email;
+    private $cc;
+    private $tel;
+    private $rol;
     private $url;
 
     public function __construct(){
@@ -16,7 +23,7 @@ class User{
             $md5pass = md5($pass);
         
             $filter = [
-                'nombreUsuario' => $user,
+                'usuario' => $user,
                 'contrasenia' => $md5pass
             ];
             $query = new MongoDB\Driver\Query($filter);
@@ -42,15 +49,22 @@ class User{
         try{
             $manager = new MongoDB\Driver\Manager($this->url);
             $filter = [
-                'nombreUsuario' => $user
+                'usuario' => $user
             ];
             $query = new MongoDB\Driver\Query($filter);
             $cursor = $manager->executeQuery('hospital.usuarios', $query);
 
             foreach($cursor as $document){
                 $document = json_decode(json_encode($document),true);
-                $this->nombre = $document['nombre'];
-                $this->usename = $document['nombreUsuario'];
+                $this->nombre = $document['nombres']." ". $document['apellidos'];
+                $this->nombres = $document['nombres'];
+                $this->apellidos = $document['apellidos'];
+                $this->nombreUsuario = $document['usuario'];
+                $this->contrasenia = $document['contrasenia'];
+                $this->email = $document['email'];
+                $this->cc = $document['cc'];
+                $this->tel = $document['tel'];
+                $this->rol = $document['rol'];
             }
         }catch(MongoConnectionException $e){
             var_dump($e);
@@ -59,6 +73,30 @@ class User{
 
     public function getNombre(){
         return $this->nombre;
+    }
+    public function getNombres(){
+        return $this->nombres;
+    }
+    public function getApellidos(){
+        return $this->apellidos;
+    }
+    public function getNombreUsuario(){
+        return $this->nombreUsuario;
+    }
+    public function getContrasenia(){
+        return $this->contrasenia;
+    }
+    public function getEmail(){
+        return $this->email;
+    }
+    public function getCc(){
+        return $this->cc;
+    }
+    public function getTel(){
+        return $this->tel;
+    }
+    public function getRol(){
+        return $this->rol;
     }
 }
 

@@ -5,7 +5,7 @@ function crearEscuchadores(){
     elemento4.addEventListener('click',escuchador3);
 } 
 //-----------------------------------------------------------
-document.getElementById('loginImg').style.backgroundImage='url("./img/login.png")';
+document.getElementById('loginImg').style.backgroundImage='url("../img/login.png")';
 document.getElementById('loginImg').style.backgroundSize='contain';
 document.getElementById('loginImg').style.height=document.getElementById('loginImg').clientWidth+'px';
 document.getElementById('loginImg').style.backgroundRepeat='no-repeat';
@@ -34,6 +34,7 @@ function registrarUsuario(){
     
     if(enviar){
         var formData = new FormData(document.getElementById("formularioReg"));
+
         $.ajax({
             url: "registry.php",
             type: "post",

@@ -1,0 +1,9 @@
+footer{
+	float: left;
+	background-color: darkcyan;
+    color: aliceblue;
+    width: 100%;
+}
+footer p{
+	text-align: center;
+}

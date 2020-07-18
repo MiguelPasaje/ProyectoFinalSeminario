@@ -2,14 +2,14 @@
 //---------------------------------------------------------------
 if (extension_loaded("mongodb")&& isset($_POST["usuario"])){
     try{
-        $manager = new MongoDB\Driver\Manager("mongodb+srv://Andres:catacumba69@cluster0-jlyfz.mongodb.net/parking?retryWrites=true&w=majority");
+        $manager = new MongoDB\Driver\Manager("mongodb+srv://Andres:catacumba69@cluster0-jlyfz.mongodb.net/hospital?retryWrites=true&w=majority");
         
         $filter = [
-            'userName' => $_POST["usuario"]
+            'usuario' => $_POST["usuario"]
         ];
         $bulk = new MongoDB\Driver\BulkWrite;
         $query = new MongoDB\Driver\Query($filter);
-        $cursor = $manager->executeQuery('parking.users', $query);
+        $cursor = $manager->executeQuery('hospital.usuarios', $query);
         $contador=0;
         foreach($cursor as $document){
             $document = json_decode(json_encode($document),true);
@@ -22,17 +22,18 @@ if (extension_loaded("mongodb")&& isset($_POST["usuario"])){
             $mensaje = 'Error, el nombre de ususario ya existe';
         }else{
             $document2 = [
-                'userName' => $_POST["usuario"] ,
-                'pass' => $_POST["contraseniaReg"] ,
+                'nombres' => $_POST["nombres"] ,
+                'apellidos' => $_POST["apellidos"] ,
+                'usuario' => $_POST["usuario"] ,
+                'contrasenia' => md5($_POST["contrasenia"]) ,
                 'email' => $_POST["email"] ,
-                'name' => $_POST["nombres"] ,
-                'lastName' => $_POST["apellidos"] ,
                 'cc' => $_POST["cc"],
-                'tel' => $_POST["tel"] 
+                'tel' => $_POST["tel"],
+                'rol' => md5("medico") 
             ];
             $bulk->insert($document2);
-            $manager->executeBulkWrite('parking.users', $bulk); 
-            $mensaje = "Registro Exitoso!";
+            $manager->executeBulkWrite("hospital.".$_POST["coleccion"], $bulk); 
+            $mensaje = "Registro Exitoso!, su cuenta estará en espera de confirmación";
         }
         $datosExportados = array(
             "mensaje" => $mensaje,

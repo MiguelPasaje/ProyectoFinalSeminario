@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sociedad De Pediatría / Regional Nariño</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/estilo.css">
 </head>
 <body>
@@ -38,14 +40,23 @@
                     <li class="nav-item">
                         <a id="contacto" href="#"  class="nav-link">CONTACTANOS</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ADMINISTRAR PÁGINA
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a id="administrarEventos" class="dropdown-item" href="#">EVENTOS</a>
+                            <a id="administrarUsuarios" class="dropdown-item" href="#">USUARIOS</a>
+                            <a id="administrarContenido" class="dropdown-item" href="#">CONTENIDO DE LA PÁGINA</a>
+                        </div>
+                    </li>
                 </ul>
                 <ul class="nav justify-content-end">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo $user->getNombre();  ?>
+                        <?php echo $user->getNombre();  ?> (Administrador)
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a id="detalles" class="dropdown-item" href="#">Detalles</a>
                             <a id="cerrar" class="dropdown-item" href="includes/logout.php">Cerrar Sesión</a>
                         </div>
                     </li>
@@ -53,59 +64,29 @@
             </div>
         </nav>
     </header>
-    <section id="registry" style="display: none;">
-        <div class="container" style="padding-top: 5vh;">
-            <div class="col"><h1 id="tituloForm" style="text-align: center; padding-bottom: 5vmin;">Estos son los Datos de tu cuenta</h1></div>
-            <form id="formularioReg" action="registry.php" method="GET" style="text-align: center;">
-                <div class="form-group">
-                    <label for="nombres">Nombres</label>
-                    <input type="text" class="form-control" id="nombres" name="nombres" required>
-                </div>
-                <div class="form-group">
-                    <label for="apellidos">Apellidos</label>
-                    <input type="text" class="form-control" id="apellidos" name="apellidos" required>
-                </div>
-                <div class="form-group">
-                    <label for="usuario">Noombre de Usuario</label>
-                    <input type="text" class="form-control" id="usuario" name="usuario" required>
-                </div>
-                <div class="form-group">
-                    <label for="contrasenia">Contraseña</label>
-                    <input type="password" class="form-control" id="contraseniaReg" name="contraseniaReg" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="cc">CC</label>
-                    <input type="text" class="form-control" id="cc" name="cc" required>
-                </div>
-                <div class="form-group">
-                    <label for="tel">Teléfono</label>
-                    <input type="text" class="form-control" id="tel2" name="tel" required>
-                </div>
-                <div class="row">
-                    <button id="btnGuardar" type="button" class="col btn btn-success" onclick="actualizarDatos()">Guardar</button>
-                    <button id="btnCancelar" type="button" class="col btn btn-danger">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </section>
     <section id="datosPagina">
         <div class="container">
-            <?php include_once 'carrousel.php';?>
-            <div id="datosInicio" style='margin-top:5%'></div>
-            <div id="datosQuienesSomos" style="display:none"></div>
-            <div id="datosEventos" style="display:none"><h1>DATOS EVENTOS</h1></div>
-            <div id="datosContacto" style="display:none"><?php include_once 'contacto.php';?></div>
+            <div id="carrousel"><?php include_once 'carrousel.php';?></div>
+            <div class="container">
+                <div id="datosInicio" style='margin-top:5%'></div>
+                <div id="datosQuienesSomos" style="display:none"></div>
+                <div id="datosEventos" style="display:none"><h1>DATOS EVENTOS</h1></div>
+                <div id="datosContacto" style="display:none"><?php include_once 'contacto.php';?></div>
+            </div>
         </div>
+        <?php include_once 'adminTables.php';?>
     </section>
     <footer><?php include_once 'footer.php';?></footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>    
-    <script src="./js/codigoHome.js"></script>
+    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/b-print-1.6.2/datatables.min.js"></script>
+    <script src="https://kit.fontawesome.com/033a92cf04.js" crossorigin="anonymous"></script>
+    <script src="./js/jquery.tabledit.js"></script>
+    <script src="./js/codigoAdmin.js"></script>
 </body>
 </html>
 
